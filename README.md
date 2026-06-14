@@ -95,7 +95,7 @@ Copy the repository URL and ask an AI agent to download and install the skill fo
 
 ```text
 Please help me download and install the Codex skill from this repository:
-https://github.com/Flying-Potato123/eprimary-valuation
+https://github.com/Flying-Potato123/primary-valuation
 ```
 
 Method 2: Manual copy or symlink.  
