@@ -16,7 +16,6 @@ Primary Valuation是专为一级市场打造的专业估值工作流，全面覆
 ```text
 pri-valuation/
 ├── README.md
-├── readme2.md
 ├── requirements.txt
 ├── SKILL.md
 ├── agents/
@@ -59,20 +58,28 @@ pri-valuation/
 **English**  
 For startups, the answer is rarely a single DCF figure. Early-stage companies typically have limited historical data, unvalidated product-market fit, high future dilution risks, and value realization that is highly dependent on exit pathways. Therefore, Primary Valuation's valuation philosophy draws upon Aswath Damodaran’s "Narrative to Numbers" framework, while also incorporating methodologies specific to the primary market:
 
-- VC Method to test target returns and required ownership.
-- Scorecard to benchmark early-stage qualitative risk.
-- Comparable financing to test market pricing.
-- PWERM-style scenarios to reflect different exit paths.
-- Cap table and waterfall analysis to convert enterprise value into actual investor proceeds.
+| Valuation Lens | Financial Meaning |
+|---|---|
+| VC Method | What valuation allows the investor to reach the required MOIC or IRR? |
+| Scorecard | How does the company compare with other early-stage companies on team, market, product, traction, and risk? |
+| Comparable Financing | How is the private market pricing similar companies or similar rounds? |
+| DCF / Narrative Value | What intrinsic value is implied by the business story, growth, margin, reinvestment, and risk? |
+| PWERM / Scenario Analysis | How do IPO, M&A, continued operation, or failure scenarios affect value? |
+| Cap Table / Waterfall | How much of the exit value actually flows to each shareholder class? |
 
 **中文**  
 对于创业公司，答案通常不是一个单一的 DCF 数字。早期公司历史数据有限，产品市场匹配尚未完全验证，未来稀释风险高，价值实现也高度依赖退出路径。因此，Primary Valuation 的估值思想借鉴了 Aswath Damodaran 的“叙事到数字”框架，同时结合一级市场特有方法：
 
-- 用 VC Method 检验目标回报和所需持股比例。
-- 用 Scorecard 对早期项目的定性风险进行基准化。
-- 用可比融资检验市场实际定价。
-- 用 PWERM 风格情景分析反映不同退出路径。
-- 用 Cap Table 和瀑布分配把企业价值转换为投资人真实可获得的收益。
+Pri Valuation 不依赖单一估值方法，而是对多个估值视角进行交叉验证：
+
+| 估值视角 | 金融含义 |
+|---|---|
+| VC Method | 在目标 MOIC 或 IRR 下，投资人能够接受的估值是多少？ |
+| Scorecard | 公司在团队、市场、产品、牵引力和风险方面相对同阶段公司如何？ |
+| 可比融资 | 私募市场如何给类似公司或类似轮次定价？ |
+| DCF / 叙事价值 | 商业故事、增长、利润率、再投资和风险隐含的内在价值是多少？ |
+| PWERM / 情景分析 | IPO、并购、继续经营或失败等路径如何影响价值？ |
+| Cap Table / 瀑布分配 | 退出价值最终如何分配到不同股东和证券类别？ |
 
 ---
 
