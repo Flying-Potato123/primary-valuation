@@ -83,41 +83,7 @@ Pri Valuation 不依赖单一估值方法，而是对多个估值视角进行交
 
 ---
 
-## Installation / 安装
-
-**English**  
-Install the project in a standard Python environment:
-
-```bash
-git clone <your-repo-url>
-cd pri-valuation
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install -r requirements.txt
-```
-
-**中文**  
-在标准 Python 环境中安装本项目：
-
-```bash
-git clone <your-repo-url>
-cd pri-valuation
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install -r requirements.txt
-```
-
-Windows users can activate the virtual environment with:
-
-Windows 用户可使用以下命令激活虚拟环境：
-
-```powershell
-.venv\Scripts\Activate.ps1
-```
-
----
-
-## Local Skill Installation / 本地技能安装
+## Install Locally / 本地安装
 
 **English**  
 This repository can also be used as a local Codex skill. The skill definition is stored in `SKILL.md`, and the skill name is:
