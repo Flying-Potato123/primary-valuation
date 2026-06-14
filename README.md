@@ -12,9 +12,11 @@ Pri Valuation 是一个面向一级市场估值的工作流，适用于创业公
 
 **English**  
 This project helps analysts build a structured valuation package from a single JSON configuration file. It supports VC Method, Scorecard, comparable transaction analysis, cap table modeling, waterfall distribution, dilution analysis, and report generation.
+You can navigate to the Example folder and download the sample "Suijin Tech Valuation Report" (virtually generated) to preview the final deliverable document.
 
 **中文**  
 本项目帮助分析师基于一个 JSON 配置文件生成完整的一级市场估值材料。它支持 VC Method、Scorecard、可比交易分析、Cap Table 建模、瀑布分配、稀释分析，以及估值报告生成。
+您可以前往 Example 文件夹，下载虚拟生成的“岁锦科技公司估值报告”示例，以便对最终的交付文档进行预览。
 
 Core outputs:
 
