@@ -145,7 +145,7 @@ cp -R /path/to/eprimary-valuation ~/.codex/skills/primary-market-valuation
 
 ---
 
-## How to Use After Installation / 安装后的使用方法
+## Usage / 使用方法
 
 **English**  
 After installation, you can invoke the skill by explicitly asking Codex to use `primary-market-valuation`. A good prompt should briefly state the company, financing stage, available materials, and desired outputs.
