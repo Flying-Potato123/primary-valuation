@@ -56,7 +56,7 @@ pri-valuation/
 ## Valuation Logic / 估值逻辑
 
 **English**  
-For startups, the answer is rarely a single DCF figure. Early-stage companies typically have limited historical data, unvalidated product-market fit, high future dilution risks, and value realization that is highly dependent on exit pathways. Therefore, Primary Valuation's valuation philosophy draws upon Aswath Damodaran’s "Narrative to Numbers" framework, while also incorporating methodologies specific to the primary market:
+For startups, the answer is rarely a single valuation figure. Early-stage companies typically have limited historical data, unvalidated product-market fit, high future dilution risks, and value realization that is highly dependent on exit pathways. Therefore, Primary Valuation's valuation philosophy draws upon Aswath Damodaran’s "Narrative to Numbers" framework, while also incorporating methodologies specific to the primary market:
 
 | Valuation Lens | Financial Meaning |
 |---|---|
@@ -68,7 +68,7 @@ For startups, the answer is rarely a single DCF figure. Early-stage companies ty
 | Cap Table / Waterfall | How much of the exit value actually flows to each shareholder class? |
 
 **中文**  
-对于创业公司，答案通常不是一个单一的 DCF 数字。早期公司历史数据有限，产品市场匹配尚未完全验证，未来稀释风险高，价值实现也高度依赖退出路径。因此，Primary Valuation 的估值思想借鉴了 Aswath Damodaran 的“叙事到数字”框架，同时结合一级市场特有方法：
+对于创业公司，答案通常不是一个单一的估值数字。早期公司历史数据有限，产品市场匹配尚未完全验证，未来稀释风险高，价值实现也高度依赖退出路径。因此，Primary Valuation 的估值思想借鉴了 Aswath Damodaran 的“叙事到数字”框架，同时结合一级市场特有方法：
 
 Pri Valuation 不依赖单一估值方法，而是对多个估值视角进行交叉验证：
 
