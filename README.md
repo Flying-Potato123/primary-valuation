@@ -116,4 +116,4 @@ cp assets/example-config-sujin.json output/config.json
 
 ## License
 
-尚未选择开源许可证。公开发布前请根据你的目标选择合适协议，例如 MIT、Apache-2.0，或保持私有/保留所有权利。
+MIT许可证协议，开源项目。
