@@ -122,7 +122,7 @@ Restart Codex or open a new session after installation.
 
 ```text
 请帮我下载并安装这个仓库里的 Codex skill：
-https://github.com/Flying-Potato123/eprimary-valuation
+https://github.com/Flying-Potato123/primary-valuation
 ```
 
 方法 2：手动复制或软链接。  
