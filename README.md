@@ -202,7 +202,7 @@ Use the primary-market-valuation skill to review this investment memo and identi
 ```
 
 ```text
-请使用 primary-market-valuation skill，只快速给出该项目的投前估值区间，并说明关键假设。
+请使用 primary-market-valuation skill，请你对项目进行DCF估值，并说明关键假设。
 ```
 
 ```text
