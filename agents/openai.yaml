@@ -1,0 +1,4 @@
+interface:
+  display_name: "Primary Market Valuation"
+  short_description: "VC and Damodaran private valuation"
+  default_prompt: "Use $primary-market-valuation to value this private company or financing round with VC methods, Damodaran-style narrative-to-numbers checks, cap table analysis, and report deliverables."

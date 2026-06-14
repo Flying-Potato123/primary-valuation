@@ -1,0 +1,471 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "一级市场估值配置 Schema",
+  "description": "驱动 primary-market-valuation skill 全流程的核心配置文件。所有脚本只读此文件，不读原始数据源。",
+  "type": "object",
+  "required": ["meta", "company", "round", "financials", "valuation_params", "exit_assumptions"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "description": "元数据信息",
+      "required": ["valuation_date", "currency", "report_type"],
+      "properties": {
+        "valuation_date": {
+          "type": "string",
+          "description": "估值日期，格式 YYYY年MM月",
+          "example": "2026年4月"
+        },
+        "currency": {
+          "type": "string",
+          "enum": ["CNY"],
+          "description": "货币单位（目前仅支持人民币）"
+        },
+        "unit": {
+          "type": "string",
+          "enum": ["万元"],
+          "description": "金额单位"
+        },
+        "report_type": {
+          "type": "string",
+          "enum": ["investment_memo", "ic_memo", "full_report"],
+          "description": "报告类型：investment_memo=投资备忘录, ic_memo=投委会简报, full_report=完整估值报告"
+        },
+        "analyst": {
+          "type": "string",
+          "description": "分析师姓名/团队"
+        },
+        "confidentiality": {
+          "type": "string",
+          "enum": ["机密", "内部参考", "公开"],
+          "default": "机密"
+        }
+      }
+    },
+
+    "company": {
+      "type": "object",
+      "description": "标的公司基本信息",
+      "required": ["name", "industry", "sub_industry", "founded_year", "headquarters"],
+      "properties": {
+        "name": {"type": "string", "description": "公司中文全称"},
+        "name_en": {"type": "string", "description": "公司英文名称"},
+        "industry": {"type": "string", "description": "一级行业分类"},
+        "sub_industry": {"type": "string", "description": "二级细分行业"},
+        "founded_year": {"type": "integer"},
+        "headquarters": {"type": "string", "description": "总部城市"},
+        "description": {"type": "string", "description": "公司一句话描述"},
+        "business_model": {
+          "type": "string",
+          "enum": ["SaaS", "marketplace", "consumer_brand", "manufacturing", "biotech", "ai_software", "hardware", "fintech", "content", "service"],
+          "description": "商业模式分类"
+        },
+        "website": {"type": "string"}
+      }
+    },
+
+    "round": {
+      "type": "object",
+      "description": "融资轮次信息",
+      "required": ["stage", "round_amount", "equity_offered", "security_type"],
+      "properties": {
+        "stage": {
+          "type": "string",
+          "enum": ["Angel", "Seed", "Pre-A", "A", "B", "C", "D", "Pre-IPO"],
+          "description": "当前融资轮次"
+        },
+        "round_amount": {
+          "type": "number",
+          "description": "本轮融资额（万元）"
+        },
+        "equity_offered": {
+          "type": "number",
+          "minimum": 0.01,
+          "maximum": 0.50,
+          "description": "出让股权比例（小数，如 0.10 = 10%）"
+        },
+        "security_type": {
+          "type": "string",
+          "enum": ["common_shares", "preferred_shares", "SAFE", "convertible_note"],
+          "description": "证券类型"
+        },
+        "bp_implied_pre_money": {
+          "type": "number",
+          "description": "BP 隐含投前估值（万元），如有"
+        },
+        "bp_implied_post_money": {
+          "type": "number",
+          "description": "BP 隐含投后估值（万元），如有"
+        }
+      }
+    },
+
+    "financials": {
+      "type": "object",
+      "description": "财务数据（历史 + 预测）",
+      "required": ["forecast_years", "revenue_forecast"],
+      "properties": {
+        "forecast_years": {
+          "type": "array",
+          "items": {"type": "integer"},
+          "description": "预测年份列表，如 [2026, 2027, 2028, 2029, 2030]",
+          "minItems": 3
+        },
+        "historical_revenue": {
+          "type": "object",
+          "description": "历史收入（如有），key=年份, value=万元",
+          "additionalProperties": {"type": "number"}
+        },
+        "revenue_forecast": {
+          "type": "object",
+          "description": "收入预测，key=年份, value=万元",
+          "additionalProperties": {"type": "number"}
+        },
+        "gross_margin": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "description": "毛利率"
+        },
+        "ebit_margin": {
+          "type": "object",
+          "description": "EBIT 利润率预测，key=年份, value=小数",
+          "additionalProperties": {"type": "number"}
+        },
+        "net_margin": {
+          "type": "object",
+          "description": "净利润率预测，key=年份, value=小数",
+          "additionalProperties": {"type": "number"}
+        },
+        "net_profit": {
+          "type": "object",
+          "description": "净利润预测（万元），key=年份, value=万元",
+          "additionalProperties": {"type": "number"}
+        },
+        "key_drivers": {
+          "type": "object",
+          "description": "业务关键驱动指标",
+          "properties": {
+            "users": {"type": "object", "description": "用户数，key=年份"},
+            "arr": {"type": "object", "description": "ARR（万元），SaaS公司，key=年份"},
+            "gmv": {"type": "object", "description": "GMV（万元），平台公司，key=年份"},
+            "unit_economics": {"type": "string", "description": "单位经济学描述"},
+            "other_kpis": {"type": "string", "description": "其他关键KPI"}
+          }
+        },
+        "source": {
+          "type": "string",
+          "description": "财务数据来源说明",
+          "enum": ["BP/Company-provided", "Audited/filed", "Analyst judgment", "Mixed"]
+        }
+      }
+    },
+
+    "capital_structure": {
+      "type": "object",
+      "description": "资本结构（当前及历史融资）",
+      "properties": {
+        "founder_shares": {
+          "type": "number",
+          "description": "创始人总股数（万股）"
+        },
+        "existing_esop_pct": {
+          "type": "number",
+          "description": "现有期权池比例（小数）"
+        },
+        "target_esop_pct": {
+          "type": "number",
+          "description": "融资后期权池目标比例（小数）"
+        },
+        "esop_expansion_burden": {
+          "type": "string",
+          "enum": ["pre_money", "post_money", "pro_rata"],
+          "description": "期权池扩容由谁承担：pre_money=创始人承担, post_money=共同承担, pro_rata=按比例",
+          "default": "pre_money"
+        },
+        "prior_rounds": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {"type": "string", "description": "轮次名称，如 Angel, Seed"},
+              "investment": {"type": "number", "description": "投资额（万元）"},
+              "pre_money": {"type": "number", "description": "投前估值（万元）"},
+              "post_money": {"type": "number", "description": "投后估值（万元）"},
+              "shares": {"type": "number", "description": "股份数（万股）"},
+              "lp_multiple": {"type": "number", "description": "清算优先权倍数"},
+              "participating": {"type": "boolean", "description": "是否参与分配"},
+              "participation_cap": {"type": "number", "description": "参与分配上限倍数（如 3x），null=无上限"},
+              "seniority": {"type": "integer", "description": "优先级（数字越大越优先）"},
+              "anti_dilution": {
+                "type": "string",
+                "enum": ["none", "full_ratchet", "weighted_average_broad", "weighted_average_narrow"]
+              }
+            }
+          },
+          "description": "历史优先轮次（不含本轮）"
+        },
+        "warrants": {
+          "type": "array",
+          "description": "未执行认股权证"
+        },
+        "convertible_notes": {
+          "type": "array",
+          "description": "未转换可转债"
+        }
+      }
+    },
+
+    "valuation_params": {
+      "type": "object",
+      "description": "估值方法参数",
+      "required": ["methods", "method_weights"],
+      "properties": {
+        "methods": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["vc_method", "scorecard", "berkus", "dcf", "comps", "precedent_transactions", "pwerm", "opm"]
+          },
+          "description": "选用的估值方法列表"
+        },
+        "method_weights": {
+          "type": "object",
+          "description": "各方法权重（和为1.0），key=方法名，value=权重",
+          "additionalProperties": {"type": "number"}
+        },
+        "vc_method": {
+          "type": "object",
+          "description": "VC Method 参数",
+          "properties": {
+            "exit_year": {"type": "integer", "description": "预计退出年份"},
+            "exit_metric_type": {
+              "type": "string",
+              "enum": ["revenue", "ebitda", "net_profit"],
+              "description": "退出倍数基准指标"
+            },
+            "exit_metric_value": {"type": "number", "description": "退出年份预测指标值（万元）"},
+            "exit_multiple_range": {
+              "type": "object",
+              "properties": {
+                "low": {"type": "number", "description": "保守退出倍数"},
+                "mid": {"type": "number", "description": "基准退出倍数"},
+                "high": {"type": "number", "description": "乐观退出倍数"}
+              }
+            },
+            "discount_to_public": {"type": "number", "description": "vs 上市公司倍数折扣率（小数）"},
+            "target_moic_scenarios": {
+              "type": "array",
+              "items": {"type": "number"},
+              "description": "目标 MOIC 情景，如 [5, 8, 12]"
+            }
+          }
+        },
+        "scorecard": {
+          "type": "object",
+          "description": "Scorecard 参数",
+          "properties": {
+            "baseline_valuation": {"type": "number", "description": "行业基准投前估值（万元）"},
+            "baseline_source": {"type": "string", "description": "基准来源"},
+            "scores": {
+              "type": "object",
+              "properties": {
+                "team": {"type": "number", "minimum": 0, "maximum": 2.0},
+                "market": {"type": "number", "minimum": 0, "maximum": 2.0},
+                "product_tech": {"type": "number", "minimum": 0, "maximum": 2.0},
+                "competition": {"type": "number", "minimum": 0, "maximum": 2.0},
+                "sales_marketing": {"type": "number", "minimum": 0, "maximum": 2.0},
+                "other": {"type": "number", "minimum": 0, "maximum": 2.0}
+              }
+            },
+            "score_rationale": {
+              "type": "object",
+              "description": "每个维度打分的理由",
+              "additionalProperties": {"type": "string"}
+            }
+          }
+        },
+        "dcf": {
+          "type": "object",
+          "description": "DCF 参数（适用于中后期公司）",
+          "properties": {
+            "wacc": {"type": "number", "description": "加权平均资本成本（小数）"},
+            "terminal_growth": {"type": "number", "description": "永续增长率（小数）"},
+            "failure_rates": {
+              "type": "object",
+              "description": "逐年失败概率，key=年份索引(1-based), value=小数",
+              "additionalProperties": {"type": "number"}
+            },
+            "tax_rate": {"type": "number", "description": "所得税率（小数）"},
+            "depreciation_pct": {"type": "number", "description": "折旧摊销占收入比（小数）"},
+            "capex_pct": {"type": "number", "description": "资本开支占收入比（小数）"},
+            "nwc_pct": {"type": "number", "description": "营运资本增量占收入比（小数）"}
+          }
+        },
+        "comps": {
+          "type": "object",
+          "description": "可比公司分析参数",
+          "properties": {
+            "public_comps": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {"type": "string"},
+                  "ticker": {"type": "string"},
+                  "market": {"type": "string", "enum": ["A股", "港股", "美股"]},
+                  "revenue_ttm": {"type": "number"},
+                  "growth_rate": {"type": "number"},
+                  "gross_margin": {"type": "number"},
+                  "pe_ttm": {"type": "number"},
+                  "ev_revenue": {"type": "number"},
+                  "ev_ebitda": {"type": "number"}
+                }
+              }
+            },
+            "transaction_comps": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "target_name": {"type": "string"},
+                  "date": {"type": "string"},
+                  "stage": {"type": "string"},
+                  "amount": {"type": "number"},
+                  "post_money": {"type": "number"},
+                  "revenue_multiple": {"type": "number"},
+                  "source": {"type": "string"},
+                  "reliability": {"type": "string", "enum": ["高", "中", "低"]}
+                }
+              }
+            }
+          }
+        },
+        "pwerm": {
+          "type": "object",
+          "description": "PWERM 情景分析参数",
+          "properties": {
+            "scenarios": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {"type": "string", "enum": ["IPO", "M&A", "继续运营", "清算", "自定义"]},
+                  "probability": {"type": "number", "description": "发生概率（小数）"},
+                  "exit_year": {"type": "integer"},
+                  "exit_value": {"type": "number", "description": "退出价值（万元）"},
+                  "rationale": {"type": "string", "description": "概率和退出价值的假设理由"}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "exit_assumptions": {
+      "type": "object",
+      "description": "退出假设",
+      "required": ["primary_path", "exit_years"],
+      "properties": {
+        "primary_path": {
+          "type": "string",
+          "enum": ["IPO", "M&A", "Secondary", "Next_round"],
+          "description": "主要退出路径"
+        },
+        "secondary_path": {
+          "type": "string",
+          "enum": ["IPO", "M&A", "Secondary", "Next_round"],
+          "description": "次要退出路径"
+        },
+        "exit_years": {
+          "type": "object",
+          "properties": {
+            "conservative": {"type": "integer"},
+            "base": {"type": "integer"},
+            "optimistic": {"type": "integer"}
+          }
+        },
+        "ipo_market": {
+          "type": "string",
+          "enum": ["科创板", "创业板", "北交所", "港股", "美股", "未定"],
+          "description": "最可能的上市市场"
+        }
+      }
+    },
+
+    "market_context": {
+      "type": "object",
+      "description": "行业与市场背景",
+      "properties": {
+        "tam": {
+          "type": "object",
+          "properties": {
+            "value": {"type": "number", "description": "TAM 值（万元）"},
+            "year": {"type": "integer"},
+            "source": {"type": "string"}
+          }
+        },
+        "sam": {
+          "type": "object",
+          "properties": {
+            "value": {"type": "number"},
+            "year": {"type": "integer"},
+            "source": {"type": "string"}
+          }
+        },
+        "som": {
+          "type": "object",
+          "properties": {
+            "value": {"type": "number"},
+            "year": {"type": "integer"},
+            "source": {"type": "string"}
+          }
+        },
+        "market_growth_rate": {"type": "number", "description": "行业 CAGR（小数）"},
+        "policy_environment": {"type": "string", "description": "政策环境描述"},
+        "key_trends": {"type": "array", "items": {"type": "string"}, "description": "关键行业趋势"},
+        "competitive_landscape": {"type": "string", "description": "竞争格局简述"}
+      }
+    },
+
+    "risks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "category": {"type": "string", "enum": ["市场风险", "技术风险", "团队风险", "竞争风险", "监管风险", "财务风险", "退出风险"]},
+          "description": {"type": "string"},
+          "severity": {"type": "string", "enum": ["高", "中", "低"]},
+          "mitigation": {"type": "string"}
+        }
+      }
+    },
+
+    "fund_usage": {
+      "type": "object",
+      "description": "本轮融资用途",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "amount": {"type": "number", "description": "金额（万元）"},
+          "pct": {"type": "number", "description": "占比（小数）"},
+          "description": {"type": "string"}
+        }
+      }
+    },
+
+    "source_log": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "param": {"type": "string", "description": "参数名"},
+          "value": {"type": "string", "description": "参数值"},
+          "source": {"type": "string", "description": "来源标签：Company-provided / Audited / Public market data / Private transaction data / Industry source / Analyst judgment"},
+          "detail": {"type": "string", "description": "来源详情（URL/文件名/日期）"}
+        }
+      },
+      "description": "关键假设溯源表"
+    }
+  }
+}
