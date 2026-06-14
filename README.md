@@ -54,7 +54,7 @@ pri-valuation/
 
 ---
 
-## Damodaran-Style Valuation / 达摩达兰式估值逻辑
+## Valuation Logic / 估值逻辑
 
 **English**  
 For startups, the answer is rarely a single DCF figure. Early-stage companies typically have limited historical data, unvalidated product-market fit, high future dilution risks, and value realization that is highly dependent on exit pathways. Therefore, Primary Valuation's valuation philosophy draws upon Aswath Damodaran’s "Narrative to Numbers" framework, while also incorporating methodologies specific to the primary market:
