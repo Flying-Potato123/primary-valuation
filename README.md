@@ -1,4 +1,4 @@
-# Pri Valuation
+# Primary Valuation
 
 **English**  
 Pri Valuation is a primary-market valuation workflow for startups, private companies, venture rounds, growth equity financings, and Pre-IPO situations. It converts an investment story into traceable assumptions, valuation models, cap table analysis, and professional Word/PPT/Excel deliverables.
