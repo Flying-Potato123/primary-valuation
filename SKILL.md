@@ -26,6 +26,18 @@ Load only the files needed for the task:
 
 Use `assets/config-schema-vc.json` to structure model inputs. Use `assets/example-config-sujin.json` as an example only; replace company-specific facts and assumptions.
 
+## Sub-Skill Routing
+
+When a primary-market valuation task needs deeper specialized work, load and follow the relevant sub-skill package before building the final integrated conclusion:
+
+| Specialized need | Use sub-skill |
+|---|---|
+| Detailed DCF, intrinsic value modeling, WACC, terminal value, sensitivity tables, Monte Carlo, or Excel DCF model | `dcf-model/SKILL.md` |
+| Comparable company analysis, trading multiples, operating metric benchmarking, public peer tables, IPO/funding-round pricing support | `comps-analysis/SKILL.md` |
+| Competitive landscape, market map, competitor deep-dives, peer positioning, strategic market review, or competitive investment memo deck | `competitive-analysis/SKILL.md` |
+
+Use these sub-skills as specialist modules. Return their outputs to the integrated primary-market valuation workflow, then reconcile them with VC Method, financing terms, cap table economics, scenario analysis, and the final valuation range.
+
 ## Workflow
 
 1. Frame the assignment.
@@ -45,12 +57,62 @@ Use `assets/config-schema-vc.json` to structure model inputs. Use `assets/exampl
    - Translate risk into survival probability, required return, discount rate, dilution, and claim seniority.
 
 4. Select methods by stage and evidence.
+   - If the assignment explicitly requires DCF, comparable-company analysis, or competitive analysis, first route that portion to the corresponding sub-skill in `dcf-model/`, `comps-analysis/`, or `competitive-analysis/`, then integrate the output into the primary-market valuation conclusion.
 
 | Stage / situation | Primary methods | Secondary checks | Avoid overweighting |
 |---|---|---|---|
 | Angel / Seed | Financing terms backsolve, VC Method, Scorecard/Berkus, comparable financing | Simple TAM/unit-economics sanity checks, exit multiple cap | Detailed DCF |
 | Pre-A / A | VC Method, comparable financing, revenue/ARR multiple, terms backsolve | Scorecard, burn/runway, unit economics | Long-horizon precision DCF |
 | B / C / Growth | VC Method, public comps, private transactions, PWERM | DCF if cash-flow path is credible, cap table waterfall | Single-method conclusion |
+| Pre-IPO | DCF, public comps, IPO/secondary discount, PWERM | VC Method as return check | Pure seed-style VC Method |
+| Biotech / deep tech | rNPV, milestone probability, comparable BD/financing deals | Cash runway, option value | Generic revenue multiple |
+| Project / asset | Incremental FCFF, scenario DCF, APV if financing side effects matter | Comparable project metrics | Sunk-cost thinking |
+
+5. Model value and investor economics.
+   - Distinguish enterprise value, equity value, pre-money, post-money, per-share value, and investor proceeds.
+   - Match cash flows and discount rates: FCFF with WACC, FCFE with cost of equity, nominal with nominal, real with real, RMB with RMB.
+   - For VC Method, calculate exit value, ownership needed, future dilution, required MOIC/IRR, and implied current pre/post-money value.
+   - For cap table work, model option pool, liquidation preference, participation, conversion, anti-dilution, warrants, SAFE/convertible notes, and waterfall proceeds.
+   - Use multiples as pricing cross-checks; test peer definition, distribution, fundamentals, and applicability.
+
+6. Reconcile the valuation range.
+   - Present range before point estimate.
+   - Reconcile at least four lenses when available: transaction terms, VC return math, intrinsic/narrative value, and pricing comps.
+   - Explain disagreements as story differences: market size, margin, reinvestment, risk, survival, liquidity, control, and exit path.
+   - Include sensitivities for the few assumptions that move the decision: exit revenue/multiple, dilution, target return, success probability, WACC/terminal growth when DCF is material.
+
+7. Deliver and review.
+   - For full reports, read `references/report-template-guide.md` before writing.
+   - Generate deliverables with scripts when possible, then review outputs against sources and assumptions.
+   - Include a disclaimer that the work is an analytical valuation, not regulated investment advice.
+
+## Script Pipeline
+
+For a full valuation package, create a project working directory and a `config.json` matching `assets/config-schema-vc.json`.
+
+Run from this skill directory or pass absolute paths:
+
+```bash
+python3 scripts/build_charts.py --outdir output/charts/
+python3 scripts/build_valuation.py --config config.json --outdir output/
+python3 scripts/build_cap_table.py --config config.json --exit-value <exit_value_wan_rmb> --outdir output/
+python3 scripts/build_report.py --config config.json --outdir output/
+```
+
+Use scripts as deterministic helpers, not substitutes for analyst review. Always inspect generated JSON/Word/PPT/Excel outputs for unit consistency, source labels, method fit, and hardcoded assumptions.
+
+## Review Checklist
+
+- Method fit matches company stage, industry, evidence quality, and valuation purpose.
+- All important assumptions have source labels and dates.
+- Growth is supported by reinvestment or operating capacity.
+- Terminal assumptions describe a mature business and do not smuggle in high-growth economics.
+- Risk is not double-counted across discount rate, cash flows, survival probability, liquidity discount, and required return.
+- EV, equity value, pre-money, post-money, per-share value, and investor proceeds are not mixed.
+- Cap table and waterfall terms are modeled when financing terms affect investor economics.
+- Public comps and private financing comps are comparable by business model, size, growth, profitability, geography, and timing.
+- Report opens with conclusion and valuation range, then supports it with evidence.
+- Missing data, low-confidence data, and analyst judgment are visible to the reader.
 | Pre-IPO | DCF, public comps, IPO/secondary discount, PWERM | VC Method as return check | Pure seed-style VC Method |
 | Biotech / deep tech | rNPV, milestone probability, comparable BD/financing deals | Cash runway, option value | Generic revenue multiple |
 | Project / asset | Incremental FCFF, scenario DCF, APV if financing side effects matter | Comparable project metrics | Sunk-cost thinking |
