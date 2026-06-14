@@ -1,4 +1,4 @@
-# Primary Valuation
+# Primary Valuation / 一级市场估值
 
 **English**  
 Pri Valuation is a primary-market valuation workflow for startups, private companies, venture rounds, growth equity financings, and Pre-IPO situations. It converts an investment story into traceable assumptions, valuation models, cap table analysis, and professional Word/PPT/Excel deliverables.
@@ -40,185 +40,209 @@ Core outputs:
 
 ---
 
-## Use Cases / 适用场景
+## Financial Valuation Logic / 金融估值构建逻辑
 
-**English**
+**English**  
+The project follows a narrative-to-numbers approach. A valuation should not begin with a multiple or a spreadsheet formula. It should begin with a clear economic story:
 
-Pri Valuation is designed for:
+```text
+Business story
+→ Economic drivers
+→ Model assumptions
+→ Valuation methods
+→ Investor economics
+→ Final valuation range
+```
 
-- Angel, Seed, Pre-A, A/B/C, Growth, and Pre-IPO valuation work
-- Startup financing analysis
-- Private-company investment memos
-- VC Method and required ownership analysis
-- Cap table, ESOP, dilution, and liquidation preference modeling
-- Comparable financing and transaction benchmarking
-- Damodaran-style narrative-to-numbers valuation
+The key question is not only "what is the company worth?" but also "what must be true for this valuation to be reasonable?"
 
-**中文**
+**中文**  
+本项目遵循“叙事到数字”的估值方法。估值不应从一个倍数或一个表格公式开始，而应从清晰的商业经济逻辑开始：
 
-Pri Valuation 适用于：
+```text
+商业故事
+→ 经济驱动因素
+→ 模型假设
+→ 估值方法
+→ 投资人经济账
+→ 最终估值区间
+```
 
-- 天使轮、种子轮、Pre-A、A/B/C 轮、成长轮和 Pre-IPO 估值
-- 创业公司融资分析
-- 私募项目投资备忘录
-- VC Method 与目标持股比例测算
-- Cap Table、期权池、稀释和清算优先权建模
-- 可比融资和可比交易分析
-- Damodaran 风格的“叙事到数字”估值分析
+核心问题不只是“这家公司值多少钱”，而是“要让这个估值成立，哪些商业假设必须是真的”。
+
+In primary-market valuation, this means:
+
+- Market size must map to revenue potential.
+- Competitive advantage must map to margin, retention, pricing power, or capital efficiency.
+- Growth must map to reinvestment needs, burn rate, hiring, sales capacity, or working capital.
+- Risk must map to survival probability, discount rate, required return, dilution, and exit path.
+- Financing terms must map to ownership, preference stack, investor proceeds, and founder dilution.
+
+在一级市场估值中，这意味着：
+
+- 市场空间必须映射到收入潜力。
+- 竞争优势必须映射到利润率、留存率、定价权或资本效率。
+- 增长必须映射到再投资需求、现金消耗、人员扩张、销售能力或营运资金。
+- 风险必须映射到存活概率、折现率、目标回报、未来稀释和退出路径。
+- 融资条款必须映射到持股比例、优先清算权、投资人分配和创始人稀释。
 
 ---
 
-## Repository Structure / 仓库结构
+## Damodaran-Style Valuation / 达摩达兰式估值逻辑
 
-**English**
+**English**  
+The valuation philosophy in this project is inspired by Aswath Damodaran's narrative-to-numbers framework. In that framework, valuation is not a mechanical exercise. It is a disciplined process for turning a story about a business into a set of financial inputs.
 
-```text
-pri-valuation/
-├── README.md
-├── readme2.md
-├── requirements.txt
-├── SKILL.md
-├── agents/
-│   └── openai.yaml
-├── assets/
-│   ├── config-schema-vc.json
-│   └── example-config-sujin.json
-├── references/
-│   ├── damodaran-method.md
-│   ├── damodaran-primary-synthesis.md
-│   ├── vc-methodology-reference.md
-│   ├── cap-table-waterfall.md
-│   ├── industry-benchmarks.md
-│   └── report-template-guide.md
-└── scripts/
-    ├── build_charts.py
-    ├── build_valuation.py
-    ├── build_cap_table.py
-    └── build_report.py
-```
+For a private company, the Damodaran-style logic can be summarized as four questions:
 
-**中文**
+1. What cash flows can the company generate if the story works?
+2. How much reinvestment is required to create that growth?
+3. How risky are those cash flows, especially given failure risk and financing uncertainty?
+4. What does the company look like at exit or maturity?
 
-```text
-pri-valuation/
-├── README.md              项目说明
-├── readme2.md             专业双语 README 草案
-├── requirements.txt       Python 依赖
-├── SKILL.md               Codex skill 定义文件
-├── agents/                Agent 配置
-├── assets/                JSON schema 与示例配置
-├── references/            方法论与报告模板参考资料
-└── scripts/               核心生成脚本
-```
+**中文**  
+本项目的估值思想借鉴了 Aswath Damodaran 的“叙事到数字”框架。在这个框架下，估值不是机械填表，而是把一个关于企业未来的故事，严谨地转化为一组财务输入。
+
+对于非上市公司，达摩达兰式估值可以归纳为四个问题：
+
+1. 如果商业故事成立，公司未来能产生多少现金流？
+2. 为了实现这种增长，公司需要投入多少资本、人员、渠道和营运资金？
+3. 这些现金流有多大风险，尤其是失败风险、融资不确定性和退出不确定性？
+4. 到退出或成熟阶段时，公司应当呈现什么样的经济特征？
+
+**English**  
+For startups, the answer is rarely a single DCF number. Early-stage companies usually have limited historical data, uncertain product-market fit, high dilution risk, and exit-dependent value realization. Therefore, Pri Valuation uses Damodaran's discipline as the foundation, but combines it with venture-specific methods:
+
+- VC Method to test target returns and required ownership.
+- Scorecard to benchmark early-stage qualitative risk.
+- Comparable financing to test market pricing.
+- PWERM-style scenarios to reflect different exit paths.
+- Cap table and waterfall analysis to convert enterprise value into actual investor proceeds.
+
+**中文**  
+对于创业公司，答案通常不是一个单一的 DCF 数字。早期公司历史数据有限，产品市场匹配尚未完全验证，未来稀释风险高，价值实现也高度依赖退出路径。因此，Pri Valuation 以达摩达兰的估值纪律为基础，同时结合一级市场特有方法：
+
+- 用 VC Method 检验目标回报和所需持股比例。
+- 用 Scorecard 对早期项目的定性风险进行基准化。
+- 用可比融资检验市场实际定价。
+- 用 PWERM 风格情景分析反映不同退出路径。
+- 用 Cap Table 和瀑布分配把企业价值转换为投资人真实可获得的收益。
+
+**English**  
+The goal is not to make an uncertain company look precise. The goal is to make uncertainty explicit, connect assumptions to value drivers, and show which assumptions would change the investment conclusion.
+
+**中文**  
+本项目的目标不是把高度不确定的公司估得看似精确，而是把不确定性显性化，把关键假设与价值驱动因素连接起来，并说明哪些假设会改变投资结论。
+
+---
+
+## Primary-Market Method Stack / 一级市场估值方法体系
+
+**English**  
+Pri Valuation does not rely on a single method. It reconciles multiple valuation lenses:
+
+| Valuation Lens | Financial Meaning |
+|---|---|
+| VC Method | What valuation allows the investor to reach the required MOIC or IRR? |
+| Scorecard | How does the company compare with other early-stage companies on team, market, product, traction, and risk? |
+| Comparable Financing | How is the private market pricing similar companies or similar rounds? |
+| DCF / Narrative Value | What intrinsic value is implied by the business story, growth, margin, reinvestment, and risk? |
+| PWERM / Scenario Analysis | How do IPO, M&A, continued operation, or failure scenarios affect value? |
+| Cap Table / Waterfall | How much of the exit value actually flows to each shareholder class? |
+
+**中文**  
+Pri Valuation 不依赖单一估值方法，而是对多个估值视角进行交叉验证：
+
+| 估值视角 | 金融含义 |
+|---|---|
+| VC Method | 在目标 MOIC 或 IRR 下，投资人能够接受的估值是多少？ |
+| Scorecard | 公司在团队、市场、产品、牵引力和风险方面相对同阶段公司如何？ |
+| 可比融资 | 私募市场如何给类似公司或类似轮次定价？ |
+| DCF / 叙事价值 | 商业故事、增长、利润率、再投资和风险隐含的内在价值是多少？ |
+| PWERM / 情景分析 | IPO、并购、继续经营或失败等路径如何影响价值？ |
+| Cap Table / 瀑布分配 | 退出价值最终如何分配到不同股东和证券类别？ |
+
+The final valuation should be a range, not a point estimate. The range should explain both intrinsic value and market pricing.
+
+最终估值应当是一个区间，而不是一个点估值。这个区间既要解释企业内在价值，也要解释市场定价。
 
 ---
 
 ## Installation / 安装
 
-**English**
-
-Clone the repository and install Python dependencies:
-
-```bash
-git clone <your-repo-url>
-cd pri-valuation
-
-python3 -m venv .venv
-source .venv/bin/activate
-
-python -m pip install --upgrade pip
-python -m pip install -r requirements.txt
-```
-
-**中文**
-
-克隆仓库并安装 Python 依赖：
+**English**  
+Install the project in a standard Python environment:
 
 ```bash
 git clone <your-repo-url>
 cd pri-valuation
-
 python3 -m venv .venv
 source .venv/bin/activate
-
-python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 ```
 
-On Windows PowerShell:
+**中文**  
+在标准 Python 环境中安装本项目：
 
-在 Windows PowerShell 中：
+```bash
+git clone <your-repo-url>
+cd pri-valuation
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+```
+
+Windows users can activate the virtual environment with:
+
+Windows 用户可使用以下命令激活虚拟环境：
 
 ```powershell
-python -m venv .venv
 .venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
-python -m pip install -r requirements.txt
 ```
 
 ---
 
 ## Local Skill Installation / 本地技能安装
 
-**English**
-
-This repository can also be installed locally as a Codex skill. The skill definition is stored in `SKILL.md`. The skill name defined inside that file is:
+**English**  
+This repository can also be used as a local Codex skill. The skill definition is stored in `SKILL.md`, and the skill name is:
 
 ```text
 primary-market-valuation
 ```
 
-To install it locally, copy or symlink this repository into your Codex skills directory.
-
-Option A: copy the project:
-
-```bash
-mkdir -p ~/.codex/skills
-cp -R /path/to/pri-valuation ~/.codex/skills/primary-market-valuation
-```
-
-Option B: symlink the project for active development:
+For local installation, copy or symlink this project into your Codex skills directory:
 
 ```bash
 mkdir -p ~/.codex/skills
 ln -s /path/to/pri-valuation ~/.codex/skills/primary-market-valuation
 ```
 
-After installation, restart Codex or start a new Codex session. You can then invoke the skill by asking Codex to use the `primary-market-valuation` skill for primary-market valuation tasks.
+Restart Codex or open a new session after installation.
+
+**中文**  
+本仓库也可以作为 Codex 本地 skill 使用。Skill 定义文件位于 `SKILL.md`，skill 名称为：
+
+```text
+primary-market-valuation
+```
+
+本地安装时，将本项目复制或软链接到 Codex 的 skills 目录：
+
+```bash
+mkdir -p ~/.codex/skills
+ln -s /path/to/pri-valuation ~/.codex/skills/primary-market-valuation
+```
+
+安装后，重启 Codex 或开启新的 Codex 会话即可。
 
 Example prompt:
+
+示例 prompt：
 
 ```text
 Use the primary-market-valuation skill to value this startup and generate a Word report, PPT, and Excel model.
 ```
-
-**中文**
-
-本仓库也可以作为 Codex 本地 skill 安装使用。Skill 定义文件位于 `SKILL.md`。该文件中定义的 skill 名称是：
-
-```text
-primary-market-valuation
-```
-
-你可以将本项目复制或软链接到 Codex 的本地 skills 目录。
-
-方式 A：复制项目：
-
-```bash
-mkdir -p ~/.codex/skills
-cp -R /path/to/pri-valuation ~/.codex/skills/primary-market-valuation
-```
-
-方式 B：使用软链接，适合持续开发：
-
-```bash
-mkdir -p ~/.codex/skills
-ln -s /path/to/pri-valuation ~/.codex/skills/primary-market-valuation
-```
-
-安装后，重启 Codex 或开启一个新的 Codex 会话。之后即可要求 Codex 使用 `primary-market-valuation` skill 来执行一级市场估值任务。
-
-示例 prompt：
 
 ```text
 请使用 primary-market-valuation skill 对这个创业项目进行估值，并生成 Word 报告、PPT 和 Excel 模型。
@@ -228,260 +252,73 @@ ln -s /path/to/pri-valuation ~/.codex/skills/primary-market-valuation
 
 ## Quick Start / 快速开始
 
-**English**
-
-Run the full example pipeline with the included sample configuration:
-
-```bash
-mkdir -p output/charts output/data output/deliverables
-cp assets/example-config-sujin.json output/config.json
-
-python scripts/build_charts.py \
-  --config output/config.json \
-  --outdir output/charts
-
-python scripts/build_valuation.py \
-  --config output/config.json \
-  --outdir output/data
-
-python scripts/build_cap_table.py \
-  --config output/config.json \
-  --exit-value 360000 \
-  --outdir output/data
-
-python scripts/build_report.py \
-  --config output/config.json \
-  --data output/data \
-  --charts output/charts \
-  --outdir output/deliverables
-```
-
-**中文**
-
-使用内置示例配置运行完整流水线：
+**English**  
+Run the included example pipeline:
 
 ```bash
 mkdir -p output/charts output/data output/deliverables
 cp assets/example-config-sujin.json output/config.json
 
-python scripts/build_charts.py \
-  --config output/config.json \
-  --outdir output/charts
-
-python scripts/build_valuation.py \
-  --config output/config.json \
-  --outdir output/data
-
-python scripts/build_cap_table.py \
-  --config output/config.json \
-  --exit-value 360000 \
-  --outdir output/data
-
-python scripts/build_report.py \
-  --config output/config.json \
-  --data output/data \
-  --charts output/charts \
-  --outdir output/deliverables
+python scripts/build_charts.py --config output/config.json --outdir output/charts
+python scripts/build_valuation.py --config output/config.json --outdir output/data
+python scripts/build_cap_table.py --config output/config.json --exit-value 360000 --outdir output/data
+python scripts/build_report.py --config output/config.json --data output/data --charts output/charts --outdir output/deliverables
 ```
 
-Generated files will be saved under:
-
-生成文件将保存到：
-
-```text
-output/charts/        Chart PNG files
-output/data/          valuation_results.json, cap_table.json, CSV files
-output/deliverables/  Word, PPT, Excel, summaries, and source logs
-```
-
----
-
-## Configuration / 配置文件
-
-**English**
-
-The valuation workflow is driven by a JSON configuration file. Start from the example file:
+**中文**  
+运行内置示例流水线：
 
 ```bash
+mkdir -p output/charts output/data output/deliverables
 cp assets/example-config-sujin.json output/config.json
+
+python scripts/build_charts.py --config output/config.json --outdir output/charts
+python scripts/build_valuation.py --config output/config.json --outdir output/data
+python scripts/build_cap_table.py --config output/config.json --exit-value 360000 --outdir output/data
+python scripts/build_report.py --config output/config.json --data output/data --charts output/charts --outdir output/deliverables
 ```
 
-The schema is documented in:
+The generated reports and models will be saved under `output/`.
 
-```text
-assets/config-schema-vc.json
-```
-
-For a real project, replace all company-specific assumptions, including:
-
-- Company description
-- Financing round terms
-- Revenue and profit forecasts
-- Capital structure and ESOP assumptions
-- Comparable companies and transactions
-- Exit assumptions
-- Risk factors
-- Source labels and analyst judgments
-
-**中文**
-
-估值流程由一个 JSON 配置文件驱动。建议从示例文件开始复制并修改：
-
-```bash
-cp assets/example-config-sujin.json output/config.json
-```
-
-字段结构参考：
-
-```text
-assets/config-schema-vc.json
-```
-
-在真实项目中，应替换所有公司相关假设，包括：
-
-- 公司介绍
-- 融资轮次条款
-- 收入和利润预测
-- 股权结构和期权池假设
-- 可比公司和可比交易
-- 退出假设
-- 风险因素
-- 数据来源和分析师判断
-
----
-
-## Valuation Methodology / 估值方法论
-
-**English**
-
-Pri Valuation follows a narrative-to-numbers framework:
-
-```text
-Business story
-→ Key assumptions
-→ Valuation model
-→ Valuation conclusion
-→ Story-model reconciliation
-```
-
-Supported valuation and analysis methods include:
-
-- VC Method
-- Scorecard Method
-- Comparable financing analysis
-- Public comparable company analysis
-- DCF as a supporting method when evidence is sufficient
-- PWERM scenario analysis
-- Cap table and waterfall analysis
-- Dilution path modeling
-
-**中文**
-
-Pri Valuation 遵循“叙事到数字”的估值框架：
-
-```text
-商业故事
-→ 关键假设
-→ 估值模型
-→ 估值结论
-→ 故事与模型再验证
-```
-
-支持的方法包括：
-
-- VC Method
-- Scorecard Method
-- 可比融资分析
-- 上市公司可比分析
-- 在证据充分时使用 DCF 作为辅助方法
-- PWERM 情景分析
-- Cap Table 与瀑布分配分析
-- 多轮融资稀释路径建模
-
----
-
-## Key Scripts / 核心脚本
-
-**English**
-
-| Script | Purpose |
-|---|---|
-| `scripts/build_charts.py` | Generates valuation charts from the config file |
-| `scripts/build_valuation.py` | Runs valuation methods and outputs `valuation_results.json` |
-| `scripts/build_cap_table.py` | Builds cap table, dilution path, and waterfall analysis |
-| `scripts/build_report.py` | Generates Word, PPT, Excel, and supporting deliverables |
-
-**中文**
-
-| 脚本 | 用途 |
-|---|---|
-| `scripts/build_charts.py` | 根据配置文件生成估值图表 |
-| `scripts/build_valuation.py` | 执行估值方法并输出 `valuation_results.json` |
-| `scripts/build_cap_table.py` | 生成 Cap Table、稀释路径和瀑布分配分析 |
-| `scripts/build_report.py` | 生成 Word、PPT、Excel 和辅助交付物 |
-
----
-
-## Quality Checks / 质量检查
-
-**English**
-
-Before using the outputs in a real investment context, verify:
-
-- Currency and unit consistency
-- Pre-money, post-money, enterprise value, and equity value definitions
-- VC Method exit value, required MOIC, dilution, and ownership logic
-- Cap table ownership adds up to 100%
-- Liquidation preference and participation terms are correctly modeled
-- Comparable companies and transactions are actually comparable
-- All assumptions have source labels or are marked as analyst judgment
-- Word/PPT outputs do not contain placeholders or sample-company residue
-
-**中文**
-
-在真实投资场景中使用输出结果前，请至少检查：
-
-- 币种和金额单位是否一致
-- 投前估值、投后估值、企业价值和股权价值是否混用
-- VC Method 的退出价值、目标 MOIC、稀释和持股逻辑是否一致
-- Cap Table 持股比例是否合计为 100%
-- 清算优先权和参与分配条款是否正确建模
-- 可比公司和可比交易是否真正可比
-- 所有关键假设是否标注来源，或明确为分析师判断
-- Word/PPT 中是否残留占位符或示例公司内容
+生成的报告和模型会保存在 `output/` 目录下。
 
 ---
 
 ## Data and Source Discipline / 数据与来源规范
 
-**English**
+**English**  
+Pri Valuation does not automatically guarantee that input data is accurate, complete, or current. Public market data, financing transactions, industry benchmarks, Damodaran data, and company-provided forecasts should be independently verified before being used in formal investment materials.
 
-The project does not automatically guarantee that input data is accurate, complete, or current. Public market data, financing transactions, industry benchmarks, Damodaran data, and company-provided projections should be independently verified before being used in formal reports.
+**中文**  
+Pri Valuation 不会自动保证输入数据真实、完整或最新。公开市场数据、融资交易、行业基准、Damodaran 数据和公司提供的预测，在用于正式投资材料前都应独立核验。
 
-**中文**
+Every important assumption should be labeled as one of the following:
 
-本项目不会自动保证输入数据真实、完整或最新。公开市场数据、融资交易、行业基准、Damodaran 数据和公司提供的预测，在用于正式报告前都应独立核验。
+每一个重要假设都应标注为以下类型之一：
+
+- Observed / 已观察数据
+- Company-provided / 公司提供
+- Public source / 公开来源
+- Private transaction / 私募交易
+- Analyst judgment / 分析师判断
+- Sensitivity / 敏感性假设
 
 ---
 
 ## Disclaimer / 免责声明
 
-**English**
-
+**English**  
 This project is for research, education, and internal analytical use only. It does not constitute investment advice, valuation opinion, financing advice, legal advice, accounting advice, or any regulated financial recommendation.
 
-**中文**
-
+**中文**  
 本项目仅用于研究、教学和内部分析，不构成投资建议、估值意见书、融资建议、法律建议、会计建议或任何受监管金融建议。
 
 ---
 
 ## License / 许可证
 
-**English**
-
+**English**  
 No open-source license has been selected yet. Before public release, choose a license that matches your intended usage, such as MIT, Apache-2.0, or private/all-rights-reserved distribution.
 
-**中文**
-
+**中文**  
 本项目暂未选择开源许可证。公开发布前，请根据你的使用目标选择合适协议，例如 MIT、Apache-2.0，或保持私有/保留所有权利。
