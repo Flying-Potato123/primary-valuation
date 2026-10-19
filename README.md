@@ -3,57 +3,49 @@
 **English**  
 Primary Valuation is a specialized valuation workflow designed for the primary market, comprehensively covering scenarios such as startups, private financing, VC/growth equity investments, and Pre-IPO stages. It transforms complex valuations into an analytical framework that integrates "quantitative digital models" with "qualitative narrative storytelling." Supporting mainstream methodologies such as Discounted Cash Flow (DCF), Comparable Transaction Analysis, Venture Capital Valuation, Scorecard analysis, and Cap Table / Waterfall modeling, it automatically generates standardized deliverables, including Word valuation reports, PPT presentations, and Excel templates.
 
-You may refer to the Example folder, where a virtually generated "SuiJin Tech valuation report" is provided for previewing the final deliverable format.
-
 **中文**  
 Primary Valuation 是专为一级市场打造的专业估值工作流，全面覆盖初创企业、私募融资、VC/成长型股权投资及 Pre-IPO 等核心场景。该工作流将复杂的估值过程转化为“量化数字模型”与“定性文字故事”深度结合的分析体系。Primary Valuation 内置了现金流折现（DCF）、可比交易分析、风险投资估值、Scorecard 分析以及 Cap Table / Waterfall 建模等多种主流方法，并能自动生成 Word 估值报告、PPT 演示文稿及 Excel 数据模板等标准化交付物。
 
-您可以前往 Example 文件夹，下载虚拟生成的“岁锦科技公司估值报告”示例，以便对最终的交付文档进行预览。
-
 ---
+
+## Workflow / 工作流程
+
+```mermaid
+flowchart LR
+    A["Company materials / 公司资料"] --> B["Narrative to numbers / 叙事转为假设"]
+    B --> C["Valuation methods / 多方法测算"]
+    C --> D["Reconciliation and risk / 交叉验证与风险"]
+    D --> E["Word report / 估值报告"]
+    D --> F["PPT / 投资汇报"]
+    D --> G["Excel / 测算模型"]
+```
+
+Start with the company's materials, translate the business narrative into model assumptions, and reconcile the valuation methods before reviewing the report, presentation, and model together.
+
+先整理企业资料，将商业叙事转化为模型假设，再对各方法结果进行交叉验证，最后结合报告、演示文稿和模型查看结论。
 
 ## Repository Structure / 仓库结构
 
-**English**
-
 ```text
-pri-valuation/
-├── README.md
-├── readme2.md
-├── requirements.txt
-├── SKILL.md
-├── agents/
-│   └── openai.yaml
-├── assets/
-│   ├── config-schema-vc.json
-│   └── example-config-sujin.json
-├── references/
-│   ├── damodaran-method.md
-│   ├── damodaran-primary-synthesis.md
-│   ├── vc-methodology-reference.md
-│   ├── cap-table-waterfall.md
-│   ├── industry-benchmarks.md
-│   └── report-template-guide.md
-└── scripts/
-    ├── build_charts.py
-    ├── build_valuation.py
-    ├── build_cap_table.py
-    └── build_report.py
+primary-valuation/
+├── README.md              Project overview / 项目说明与示例预览
+├── Example/               Editable samples / 可编辑示例
+│   ├── TZTech_example.docx
+│   ├── TZTech_example.pptx
+│   └── TZTech_example.xlsx
+├── SKILL.md               Skill definition / Skill 定义
+├── requirements.txt       Python dependencies / Python 依赖
+├── agents/                Agent configuration / Agent 配置
+├── assets/                JSON schema and sample inputs / 输入结构与示例配置
+├── docs/
+│   ├── USAGE.md           Script usage guide / 脚本使用指南
+│   └── images/            README screenshots / README 示例截图
+├── references/            Methodology and report guidance / 方法论与报告指南
+├── skills/                DCF, comps, and competitive analysis / 专项子技能
+└── scripts/               Valuation and report scripts / 估值与报告脚本
 ```
 
-**中文**
-
-```text
-pri-valuation/
-├── README.md              项目说明
-├── readme2.md             双语 README 文档
-├── requirements.txt       Python 依赖
-├── SKILL.md               Codex skill 定义文件
-├── agents/                Agent 配置
-├── assets/                JSON schema 与示例配置
-├── references/            方法论与报告模板参考资料
-└── scripts/               核心生成脚本
-```
+See [the usage guide / 脚本使用指南](docs/USAGE.md) for the script workflow.
 
 ---
 
@@ -87,6 +79,72 @@ Primary Valuation 不依赖单一估值方法，而是对多个估值视角进�
 
 ---
 
+## Example Preview / 示例预览
+
+Preview the sample deliverables below, or download the editable Word, PowerPoint, and Excel files from [`Example/`](Example/).
+
+下方提供示例截图与阅读说明，也可前往 [`Example/`](Example/) 下载可编辑的 Word 报告、PPT 和 Excel 模型。
+
+The files in `Example/` use 臻陶科技 (TZTech), a fictional semiconductor ceramics company, to illustrate an angel-round valuation package. Screenshots below are rendered from those files, with selected slide regions cropped for readability. Figures and assumptions are illustrative; the examples are primarily in Chinese.
+
+`Example/` 以虚构的半导体陶瓷企业“臻陶科技”为案例，展示一套天使轮估值交付物。下方截图均由目录中的实际文件渲染，部分幻灯片截取了重点区域以便阅读，案例数字与假设仅用于演示，示例内容以中文为主。
+
+![PPT 第 13 页图表节选：四种估值方法的投前估值范围及加权均值](docs/images/example-ppt-summary.png)
+
+**At a glance:** this chart compares the pre-money values from four methods. The dashed line marks the weighted result, making the dispersion between methods visible.
+
+**先看结论：**这张图对比四种方法的投前估值范围，并用虚线标出加权结果，直观展示不同方法的结果差异。完整 PPT 同时提供本轮融资额、投后估值与股比摘要。
+
+| Deliverable / 交付物 | What to explore / 阅读重点 | File / 示例文件 |
+|---|---|---|
+| Word report / 估值报告 | Business narrative, methodology, assumptions, and risks / 商业叙事、方法选择、假设与风险 | [TZTech_example.docx](Example/TZTech_example.docx) |
+| PowerPoint / 投资汇报 | Valuation summary, method comparison, and dilution / 估值结论、方法比较与股权稀释 | [TZTech_example.pptx](Example/TZTech_example.pptx) |
+| Excel model / 测算模型 | Valuation calculations, sensitivities, financing, and sources / 估值测算、敏感性、融资与来源 | [TZTech_example.xlsx](Example/TZTech_example.xlsx) |
+
+### PowerPoint / 从估值方法到投资人回报
+
+**How the methods fit together:** this example assigns weights to VC Method, Scorecard, Berkus, and comparable PS. DCF provides a separate intrinsic-value check and is excluded from the weighted result. These weights belong to this case and should be reconsidered for each company.
+
+**理解方法分工：**示例对 VC Method、Scorecard、Berkus 和可比 PS 分配权重，DCF 作为独立的内在价值校验，不纳入加权结果。这里的权重属于本案例，实际项目需结合企业阶段和资料质量重新判断。
+
+![PPT 第 14 页图表节选：创始团队、天使投资人与后续投资人的持股变化](docs/images/example-ppt-dilution.png)
+
+**Follow the ownership:** the chart shows how later rounds affect the angel investor's stake; the full slide also includes financing assumptions. Read the exit return alongside the assumed financing path and exit value.
+
+**追踪股权变化：**图表展示后续轮次如何稀释天使投资人的持股，完整幻灯片另附融资假设表。阅读退出回报时，应同时查看后续融资假设和退出价值，理解估值如何影响投资人的实际收益。
+
+### Word / 阅读完整分析与风险解释
+
+<table>
+  <tr>
+    <td width="50%"><a href="docs/images/example-word-summary.png"><img src="docs/images/example-word-summary.png" alt="Word 报告摘要页：交易条款与多方法估值汇总" width="100%"></a></td>
+    <td width="50%"><a href="docs/images/example-word-sensitivity.png"><img src="docs/images/example-word-sensitivity.png" alt="Word 报告敏感性与风险页：MOIC 和退出倍数的估值热力图及风险说明" width="100%"></a></td>
+  </tr>
+</table>
+
+**Read the reasoning:** the summary connects transaction terms to the valuation conclusion, while the sensitivity and risk section explains which assumptions move the result. Click either image to enlarge it, or download the report for the full narrative.
+
+**阅读推导过程：**摘要页将交易条款与估值结论对应起来，敏感性与风险章节解释哪些假设会显著影响结果。点击图片可放大查看，完整叙事、方法说明和风险分析见 Word 文件。
+
+### Excel / 核对估值与敏感性
+
+![Excel“摘要与结论”工作表节选：投前估值区间、融资额、投后估值与本轮股比](docs/images/example-excel-summary.png)
+
+**Trace the conclusion:** this excerpt shows the valuation range and financing terms. The full summary sheet also includes method values and weights. The workbook also includes VC Method, Scorecard, Berkus, comparable valuation, DCF, sensitivity analysis, financing and ownership, and assumptions and sources.
+
+**核对结论来源：**截图展示“摘要与结论”中的估值区间与融资条款，完整工作表另附各方法估值与权重。工作簿还包含 VC Method、Scorecard、Berkus、可比估值、DCF、敏感性分析、融资与股权、假设与来源等工作表，便于沿着模型查看具体测算。
+
+![Excel“敏感性分析”工作表：目标 MOIC 与退出 PS、WACC 与永续增长率两组敏感性矩阵](docs/images/example-excel-sensitivity.png)
+
+**Test the assumptions:** the two grids compare target MOIC against exit PS, and WACC against perpetual growth. They help show how much a valuation depends on the selected return target, exit multiple, and discounting assumptions.
+
+**观察假设变化：**两张矩阵分别展示“目标 MOIC × 退出 PS”和“WACC × 永续增长率”对估值的影响，用来判断结论对回报要求、退出倍数和折现假设的敏感程度。
+
+> These screenshots preview the existing samples. They do not imply identical layout or figures for every generated output. Sample files may use different reporting dates or detailed assumptions; check each file before reusing its numbers.<br>
+> 截图用于展示现有示例，不代表每次生成的版式与数字完全相同。不同示例文件中的基准日期或细项假设可能不同，引用数字前请核对各文件的具体口径。
+
+---
+
 ## Install Locally / 本地安装
 
 **English**  
@@ -102,16 +160,16 @@ Method 2: Manual copy or symlink.
 Clone or download this repository, then place the skill directory into your Codex skills folder.
 
 ```bash
-git clone https://github.com/Flying-Potato123/eprimary-valuation.git
+git clone https://github.com/Flying-Potato123/primary-valuation.git
 mkdir -p ~/.codex/skills
-ln -s /path/to/eprimary-valuation ~/.codex/skills/primary-market-valuation
+ln -s /path/to/primary-valuation ~/.codex/skills/primary-market-valuation
 ```
 
 If you prefer copying instead of symlinking:
 
 ```bash
 mkdir -p ~/.codex/skills
-cp -R /path/to/eprimary-valuation ~/.codex/skills/primary-market-valuation
+cp -R /path/to/primary-valuation ~/.codex/skills/primary-market-valuation
 ```
 
 Restart Codex or open a new session after installation.
@@ -129,16 +187,16 @@ https://github.com/Flying-Potato123/primary-valuation
 克隆或下载本仓库，然后把 skill 目录放入 Codex skills 文件夹。
 
 ```bash
-git clone https://github.com/Flying-Potato123/eprimary-valuation.git
+git clone https://github.com/Flying-Potato123/primary-valuation.git
 mkdir -p ~/.codex/skills
-ln -s /path/to/eprimary-valuation ~/.codex/skills/primary-market-valuation
+ln -s /path/to/primary-valuation ~/.codex/skills/primary-market-valuation
 ```
 
 如果您更希望复制文件而不是创建软链接：
 
 ```bash
 mkdir -p ~/.codex/skills
-cp -R /path/to/eprimary-valuation ~/.codex/skills/primary-market-valuation
+cp -R /path/to/primary-valuation ~/.codex/skills/primary-market-valuation
 ```
 
 安装后，重启 Codex 或开启新的 Codex 会话即可。
