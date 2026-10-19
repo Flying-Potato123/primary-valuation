@@ -81,50 +81,19 @@ Primary Valuation 不依赖单一估值方法，而是对多个估值视角进�
 
 ## Example Preview / 示例预览
 
-Preview the sample deliverables below, or download the editable Word, PowerPoint, and Excel files from [`Example/`](Example/).
+Preview the sample deliverables below, or download the editable Excel, Word, and PowerPoint files from [`Example/`](Example/).
 
-下方提供示例截图与阅读说明，也可前往 [`Example/`](Example/) 下载可编辑的 Word 报告、PPT 和 Excel 模型。
+下方提供示例截图与阅读说明，也可前往 [`Example/`](Example/) 下载可编辑的 Excel 模型、Word 报告和 PPT 汇报。
 
 The files in `Example/` use 臻陶科技 (TZTech), a fictional semiconductor ceramics company, to illustrate an angel-round valuation package. Screenshots below are rendered from those files, with selected slide regions cropped for readability. Figures and assumptions are illustrative; the examples are primarily in Chinese.
 
 `Example/` 以虚构的半导体陶瓷企业“臻陶科技”为案例，展示一套天使轮估值交付物。下方截图均由目录中的实际文件渲染，部分幻灯片截取了重点区域以便阅读，案例数字与假设仅用于演示，示例内容以中文为主。
 
-![PPT 第 13 页图表节选：四种估值方法的投前估值范围及加权均值](docs/images/example-ppt-summary.png)
-
-**At a glance:** this chart compares the pre-money values from four methods. The dashed line marks the weighted result, making the dispersion between methods visible.
-
-**先看结论：**这张图对比四种方法的投前估值范围，并用虚线标出加权结果，直观展示不同方法的结果差异。完整 PPT 同时提供本轮融资额、投后估值与股比摘要。
-
 | Deliverable / 交付物 | What to explore / 阅读重点 | File / 示例文件 |
 |---|---|---|
+| Excel model / 测算模型 | Valuation calculations, sensitivities, financing, and sources / 估值测算、敏感性、融资与来源 | [TZTech_example.xlsx](Example/TZTech_example.xlsx) |
 | Word report / 估值报告 | Business narrative, methodology, assumptions, and risks / 商业叙事、方法选择、假设与风险 | [TZTech_example.docx](Example/TZTech_example.docx) |
 | PowerPoint / 投资汇报 | Valuation summary, method comparison, and dilution / 估值结论、方法比较与股权稀释 | [TZTech_example.pptx](Example/TZTech_example.pptx) |
-| Excel model / 测算模型 | Valuation calculations, sensitivities, financing, and sources / 估值测算、敏感性、融资与来源 | [TZTech_example.xlsx](Example/TZTech_example.xlsx) |
-
-### PowerPoint / 从估值方法到投资人回报
-
-**How the methods fit together:** this example assigns weights to VC Method, Scorecard, Berkus, and comparable PS. DCF provides a separate intrinsic-value check and is excluded from the weighted result. These weights belong to this case and should be reconsidered for each company.
-
-**理解方法分工：**示例对 VC Method、Scorecard、Berkus 和可比 PS 分配权重，DCF 作为独立的内在价值校验，不纳入加权结果。这里的权重属于本案例，实际项目需结合企业阶段和资料质量重新判断。
-
-![PPT 第 14 页图表节选：创始团队、天使投资人与后续投资人的持股变化](docs/images/example-ppt-dilution.png)
-
-**Follow the ownership:** the chart shows how later rounds affect the angel investor's stake; the full slide also includes financing assumptions. Read the exit return alongside the assumed financing path and exit value.
-
-**追踪股权变化：**图表展示后续轮次如何稀释天使投资人的持股，完整幻灯片另附融资假设表。阅读退出回报时，应同时查看后续融资假设和退出价值，理解估值如何影响投资人的实际收益。
-
-### Word / 阅读完整分析与风险解释
-
-<table>
-  <tr>
-    <td width="50%"><a href="docs/images/example-word-summary.png"><img src="docs/images/example-word-summary.png" alt="Word 报告摘要页：交易条款与多方法估值汇总" width="100%"></a></td>
-    <td width="50%"><a href="docs/images/example-word-sensitivity.png"><img src="docs/images/example-word-sensitivity.png" alt="Word 报告敏感性与风险页：MOIC 和退出倍数的估值热力图及风险说明" width="100%"></a></td>
-  </tr>
-</table>
-
-**Read the reasoning:** the summary connects transaction terms to the valuation conclusion, while the sensitivity and risk section explains which assumptions move the result. Click either image to enlarge it, or download the report for the full narrative.
-
-**阅读推导过程：**摘要页将交易条款与估值结论对应起来，敏感性与风险章节解释哪些假设会显著影响结果。点击图片可放大查看，完整叙事、方法说明和风险分析见 Word 文件。
 
 ### Excel / 核对估值与敏感性
 
@@ -139,6 +108,37 @@ The files in `Example/` use 臻陶科技 (TZTech), a fictional semiconductor cer
 **Test the assumptions:** the two grids compare target MOIC against exit PS, and WACC against perpetual growth. They help show how much a valuation depends on the selected return target, exit multiple, and discounting assumptions.
 
 **观察假设变化：**两张矩阵分别展示“目标 MOIC × 退出 PS”和“WACC × 永续增长率”对估值的影响，用来判断结论对回报要求、退出倍数和折现假设的敏感程度。
+
+### Word / 阅读完整分析与风险解释
+
+<table>
+  <tr>
+    <td width="50%"><a href="docs/images/example-word-summary.png"><img src="docs/images/example-word-summary.png" alt="Word 报告摘要页：交易条款与多方法估值汇总" width="100%"></a></td>
+    <td width="50%"><a href="docs/images/example-word-sensitivity.png"><img src="docs/images/example-word-sensitivity.png" alt="Word 报告敏感性与风险页：MOIC 和退出倍数的估值热力图及风险说明" width="100%"></a></td>
+  </tr>
+</table>
+
+**Read the reasoning:** the summary connects transaction terms to the valuation conclusion, while the sensitivity and risk section explains which assumptions move the result. Click either image to enlarge it, or download the report for the full narrative.
+
+**阅读推导过程：**摘要页将交易条款与估值结论对应起来，敏感性与风险章节解释哪些假设会显著影响结果。点击图片可放大查看，完整叙事、方法说明和风险分析见 Word 文件。
+
+### PowerPoint / 从估值方法到投资人回报
+
+![PPT 第 13 页图表节选：四种估值方法的投前估值范围及加权均值](docs/images/example-ppt-summary.png)
+
+**Compare the results:** this chart compares the pre-money values from four methods. The dashed line marks the weighted result, making the dispersion between methods visible.
+
+**对比估值结果：**这张图对比四种方法的投前估值范围，并用虚线标出加权结果，直观展示不同方法的结果差异。完整 PPT 同时提供本轮融资额、投后估值与股比摘要。
+
+**How the methods fit together:** this example assigns weights to VC Method, Scorecard, Berkus, and comparable PS. DCF provides a separate intrinsic-value check and is excluded from the weighted result. These weights belong to this case and should be reconsidered for each company.
+
+**理解方法分工：**示例对 VC Method、Scorecard、Berkus 和可比 PS 分配权重，DCF 作为独立的内在价值校验，不纳入加权结果。这里的权重属于本案例，实际项目需结合企业阶段和资料质量重新判断。
+
+![PPT 第 14 页图表节选：创始团队、天使投资人与后续投资人的持股变化](docs/images/example-ppt-dilution.png)
+
+**Follow the ownership:** the chart shows how later rounds affect the angel investor's stake; the full slide also includes financing assumptions. Read the exit return alongside the assumed financing path and exit value.
+
+**追踪股权变化：**图表展示后续轮次如何稀释天使投资人的持股，完整幻灯片另附融资假设表。阅读退出回报时，应同时查看后续融资假设和退出价值，理解估值如何影响投资人的实际收益。
 
 > These screenshots preview the existing samples. They do not imply identical layout or figures for every generated output. Sample files may use different reporting dates or detailed assumptions; check each file before reusing its numbers.<br>
 > 截图用于展示现有示例，不代表每次生成的版式与数字完全相同。不同示例文件中的基准日期或细项假设可能不同，引用数字前请核对各文件的具体口径。
